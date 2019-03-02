@@ -4,6 +4,7 @@ h3 {
 	color: #000000;
 	letter-spacing: -0.3px;
 	text-align: center;
+	margin: 0px
 }
 
 h4 {
@@ -19,6 +20,7 @@ font-size: 16px;
 color: #000000;
 letter-spacing: -0.2px;
 text-align: center;
+margin: 16px;
 }
 
 
@@ -36,19 +38,35 @@ line-height: 24px;
 	background: #FFFFFF;
 	border-radius: 12px;
 	box-shadow: 2px 2px 24px 0 rgba(140,140,140,0.50);
-
+	overflow: hidden;
 	margin: 0 auto;
 	height: 640px;	
 	width: 328px;
 
 }
 
-.image-container {
-	border-radius: 1200px;
+.profile-container {
 	width: 280px;
-	height: 280px
+	height: 280px;
+	padding: 24px 24px 16px 24px;
+}
+.code-container {
+	width: 168px;
+	height: 168px;
+	margin: 0 auto;
+	display: block;
+	padding-top: 8px;
+}
+.license-type {
 
+	background: rgba(34,255,1,0.60);
+	position: relative;
+	height: 8px;
+	width: 328px;
+	bottom: -10px;
 
 }
 
-
+.divider {
+	height:24px;
+}
