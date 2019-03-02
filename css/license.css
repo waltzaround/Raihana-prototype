@@ -1,11 +1,54 @@
+h3 {
+	font-family: ObjectSans-Heavy;
+	font-size: 24px;
+	color: #000000;
+	letter-spacing: -0.3px;
+	text-align: center;
+}
+
+h4 {
+font-family: ObjectSans-Heavy;
+font-size: 16px;
+color: #000000;
+letter-spacing: -0.2px;
+}
+
+p {
+font-family: ObjectSans-Regular;
+font-size: 16px;
+color: #000000;
+letter-spacing: -0.2px;
+text-align: center;
+}
+
+
+.micro {
+font-family: ObjectSans-Regular;
+font-size: 11px;
+color: #000000;
+letter-spacing: -0.14px;
+text-align: right;
+line-height: 24px;
+}
+
 .card-container {
 	
-	background-color: #fff;
+	background: #FFFFFF;
 	border-radius: 12px;
+	box-shadow: 2px 2px 24px 0 rgba(140,140,140,0.50);
 
+	margin: 0 auto;
 	height: 640px;	
 	width: 328px;
 
+}
+
+.image-container {
+	border-radius: 1200px;
+	width: 280px;
+	height: 280px
 
 
 }
+
+
