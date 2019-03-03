@@ -1,13 +1,13 @@
 @font-face {
   font-family: 'ObjectSans-Heavy';
-  src: url('../assets/fonts/objec-sans/ObjectSans-Heavy.otf') format('otf');
-  src: url('../assets/fonts/objec-sans/ObjectSans-Heavy.ttf') format('ttf');
+  src: url('../assets/fonts/object-sans/ObjectSans-Heavy.otf') format('otf');
+  src: url('../assets/fonts/object-sans/ObjectSans-Heavy.ttf') format('ttf');
 }
 
 @font-face {
   font-family: 'ObjectSans-Regular';
-  src: url('../assets/fonts/objec-sans/ObjectSans-Regular.otf') format('otf');
-  src: url('../assets/fonts/objec-sans/ObjectSans-Regular.ttf') format('ttf');
+  src: url('../assets/fonts/object-sans/ObjectSans-Regular.otf') format('otf');
+  src: url('../assets/fonts/object-sans/ObjectSans-Regular.ttf') format('ttf');
 }
 
 h1 {
