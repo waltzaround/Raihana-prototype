@@ -10,8 +10,8 @@
   font-family: 'ObjectSans-Regular';
   src: url('../../assets/fonts/object-sans/ObjectSans-Regular.otf') format('otf');
   src: url('../../assets/fonts/object-sans/ObjectSans-Regular.ttf') format('ttf');
-  src: url('../../assets/fonts/object-sans/ObjectSans-Heavy.woff') format('woff');
-  src: url('../../assets/fonts/object-sans/ObjectSans-Heavy.woff2') format('woff2');
+  src: url('../../assets/fonts/object-sans/ObjectSans-Regular.woff') format('woff');
+  src: url('../../assets/fonts/object-sans/ObjectSans-Regular.woff2') format('woff2');
 }
 
 h1 {
