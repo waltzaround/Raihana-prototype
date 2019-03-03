@@ -1,0 +1,10 @@
+##To test the QR scanner on your dev machine, do 
+`openssl req -newkey rsa:2048 -new -nodes -keyout key.pem -out csr.pem`
+`openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem`
+
+https://stackoverflow.com/questions/12871565/how-to-create-pem-files-for-https-web-server
+#note: this is only for dev, don't use this for production
+
+
+This is the quick intro tutorial to the qr scanner library
+https://gist.github.com/dvergeylen/a256deb3182b8a863238fcc0704aecb9

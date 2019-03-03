@@ -16,13 +16,125 @@
   <link rel="stylesheet" href="../../css/components.css">
   <link rel="stylesheet" href="../../css/pages/scan.css">
 
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 
 <body class="background-grey body-center-wrapper">
-  <svg class="scan-main-icon" xmlns="http://www.w3.org/2000/svg" width="135" height="121"><g fill="none" fill-rule="evenodd" transform="translate(-12 -13)"><path d="M0 0h160v160H0z"/><circle cx="79.574" cy="80.426" r="20" fill="#000" fill-rule="nonzero"/><path fill="#000" fill-rule="nonzero" d="M133.021 26.95h-21.178l-8.284-9c-2.472-2.733-6.08-4.333-9.821-4.333H65.41c-3.741 0-7.349 1.6-9.888 4.333l-8.217 9H26.128c-7.35 0-13.362 6-13.362 13.334v80c0 7.333 6.013 13.333 13.362 13.333H133.02c7.35 0 13.362-6 13.362-13.333v-80c0-7.334-6.013-13.334-13.362-13.334zm-53.447 86.667c-18.439 0-33.404-14.933-33.404-33.333S61.135 46.95 79.574 46.95c18.44 0 33.405 14.934 33.405 33.334 0 18.4-14.965 33.333-33.405 33.333z"/></g></svg>
+  <svg class="scan-main-icon" xmlns="http://www.w3.org/2000/svg" width="135" height="121">
+    <g fill="none" fill-rule="evenodd" transform="translate(-12 -13)">
+      <path d="M0 0h160v160H0z" />
+      <circle cx="79.574" cy="80.426" r="20" fill="#000" fill-rule="nonzero" />
+      <path fill="#000" fill-rule="nonzero"
+        d="M133.021 26.95h-21.178l-8.284-9c-2.472-2.733-6.08-4.333-9.821-4.333H65.41c-3.741 0-7.349 1.6-9.888 4.333l-8.217 9H26.128c-7.35 0-13.362 6-13.362 13.334v80c0 7.333 6.013 13.333 13.362 13.333H133.02c7.35 0 13.362-6 13.362-13.333v-80c0-7.334-6.013-13.334-13.362-13.334zm-53.447 86.667c-18.439 0-33.404-14.933-33.404-33.333S61.135 46.95 79.574 46.95c18.44 0 33.405 14.934 33.405 33.334 0 18.4-14.965 33.333-33.405 33.333z" />
+    </g>
+  </svg>
   <h1 class="scan-title">Ready to scan</h1>
   <p class="scan-description">Press Scan and point at a license to verify customer age.</p>
-  <a class="no-underline" href="./html/success.html"><button class="button">Scan</button></a>
+  <button class="button" onclick="initScan()">Scan</button>
 </body>
+<div id="scanModal" class="qr-scan-modal">
+  <div class="qr-scan-video-container">
+    <video class="qr-scan-video__video-preview" id="video-preview"></video>
+    <canvas id="qr-canvas" class="hidden"></canvas>
+  </div>
+  <div class="qr-scan-video-prompt">
+    <p class="qr-scan-video-prompt__text">Point the phone at a license  to verify a customer’s identity.</p>
+    <button class="button" onclick="cancelScan()">Cancel</button>
+  </div>
+</div>
+
+
+
+
+<script type="text/javascript" src="../../js/vendor/jsqrcode/src/grid.js"></script>
+<script type="text/javascript" src="../../js/vendor/jsqrcode/src/version.js"></script>
+<script type="text/javascript" src="../../js/vendor/jsqrcode/src/detector.js"></script>
+<script type="text/javascript" src="../../js/vendor/jsqrcode/src/formatinf.js"></script>
+<script type="text/javascript" src="../../js/vendor/jsqrcode/src/errorlevel.js"></script>
+<script type="text/javascript" src="../../js/vendor/jsqrcode/src/bitmat.js"></script>
+<script type="text/javascript" src="../../js/vendor/jsqrcode/src/datablock.js"></script>
+<script type="text/javascript" src="../../js/vendor/jsqrcode/src/bmparser.js"></script>
+<script type="text/javascript" src="../../js/vendor/jsqrcode/src/datamask.js"></script>
+<script type="text/javascript" src="../../js/vendor/jsqrcode/src/rsdecoder.js"></script>
+<script type="text/javascript" src="../../js/vendor/jsqrcode/src/gf256poly.js"></script>
+<script type="text/javascript" src="../../js/vendor/jsqrcode/src/gf256.js"></script>
+<script type="text/javascript" src="../../js/vendor/jsqrcode/src/decoder.js"></script>
+<script type="text/javascript" src="../../js/vendor/jsqrcode/src/qrcode.js"></script>
+<script type="text/javascript" src="../../js/vendor/jsqrcode/src/findpat.js"></script>
+<script type="text/javascript" src="../../js/vendor/jsqrcode/src/alignpat.js"></script>
+<script type="text/javascript" src="../../js/vendor/jsqrcode/src/databr.js"></script>
+
+<script>
+  function tick() {
+    var video = document.getElementById("video-preview");
+    var qrCanvasElement = document.getElementById("qr-canvas");
+    var qrCanvas = qrCanvasElement.getContext("2d");
+    var width, height;
+
+    if (video.readyState === video.HAVE_ENOUGH_DATA) {
+      qrCanvasElement.height = video.videoHeight;
+      qrCanvasElement.width = video.videoWidth;
+      qrCanvas.drawImage(video, 0, 0, qrCanvasElement.width, qrCanvasElement.height);
+      try {
+        var result = qrcode.decode();
+        localStorage.QRResult = result;
+
+        window.location.href = './html/success.html'; //one level up
+
+        /* Video can now be stopped */
+        video.pause();
+        video.src = "";
+        video.srcObject.getVideoTracks().forEach(track => track.stop());
+
+        /* Display Canvas and hide video stream */
+        qrCanvasElement.classList.remove("hidden");
+      } catch (e) {
+        /* No Op */
+      }
+    }
+
+    /* If no QR could be decoded from image copied in canvas */
+    if (!video.classList.contains("hidden"))
+      setTimeout(tick, 100);
+  }
+
+  function cancelScan() {
+    var video = document.getElementById("video-preview");
+    var qrCanvasElement = document.getElementById("qr-canvas");
+    var qrCanvas = qrCanvasElement.getContext("2d");
+    var width, height;
+
+    document.querySelector('#scanModal').style.display = "none";
+
+    /* Video can now be stopped */
+    video.src = "";
+    video.srcObject.getVideoTracks().forEach(track => track.stop());
+
+    /* Display Canvas and hide video stream */
+    qrCanvasElement.classList.remove("hidden");
+  }
+
+  function initScan() {
+    document.querySelector('#scanModal').style.display = "block";
+
+    /* Ask for "environnement" (rear) camera if available (mobile), will fallback to only available otherwise (desktop).
+    * User will be prompted if (s)he allows camera to be started */
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" }, audio: false }).then(function (stream) {
+      var video = document.getElementById("video-preview");
+      video.srcObject = stream;
+      video.setAttribute("playsinline", true); /* otherwise iOS safari starts fullscreen */
+      video.play();
+      setTimeout(tick, 100); /* We launch the tick function 100ms later (see next step) */
+    })
+      .catch(function (err) {
+        console.log(err); /* User probably refused to grant access*/
+      });
+  }
+
+</script>
 
 </html>

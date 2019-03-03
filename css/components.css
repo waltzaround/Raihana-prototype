@@ -26,7 +26,6 @@
   margin: 0 auto;
 }
 
-
 /* button */
 .button {
   color: white;
@@ -44,4 +43,50 @@
 
 .button:hover {
   box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+}
+
+/* QR scanner */
+.qr-scan-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.7);
+  width: 100vw;
+  height: 100vh; 
+  display: none;
+}
+
+.qr-scan-video-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+}
+
+.qr-scan-video__video-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.qr-scan-video-prompt{
+  position: fixed;
+  background: white;
+  max-width: 400px;
+  border-radius: 10px;
+  left: 0;
+  z-index: 1;
+  width: 90%;
+  padding: 15px;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 40px;
+}
+
+.qr-scan-video-prompt__text {
+  margin-bottom: 15px;
+  line-height: 1.5;
 }
