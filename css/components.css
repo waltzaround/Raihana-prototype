@@ -4,16 +4,28 @@
 	border-radius: 12px;
 	box-shadow: 2px 2px 24px 0 rgba(140,140,140,0.50);
 	margin: 0 auto;
-	height: 640px;	
-	width: 328px;
+  max-width: 328px;
+  width: 90%;
+  padding: 24px 24px 16px 24px;
+}
+
+.card-container--success {
+  border: 6px solid #5CB461;
+}
+
+.card-container--failure {
+  border: 6px solid #EC4C4C
 }
 
 /* avatar */ 
 .image-container {
 	border-radius: 1200px;
 	width: 280px;
-	height: 280px
+  height: 280px;
+  display: block;
+  margin: 0 auto;
 }
+
 
 /* button */
 .button {

@@ -1,0 +1,24 @@
+.scan-status-title {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.scan-status-subtitle {
+  margin-bottom: 10px;
+}
+
+.scan-status-icon-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.scan-status-icon-container__icon {
+  margin-right: 20px;
+}
+
+.scan-status-button {
+  display: block;
+  margin: 0 auto;
+  margin-top: 30px;
+}

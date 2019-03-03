@@ -1,3 +1,11 @@
 .background-grey {
   background: #E8E8E8;
 }
+
+.color--success {
+  color: #5CB461;
+}
+
+.color--error {
+  color: #EC4C4C;
+}

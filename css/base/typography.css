@@ -46,3 +46,11 @@ letter-spacing: -0.14px;
 text-align: right;
 line-height: 24px;
 }
+
+.font--bold {
+  font-family: ObjectSans-Heavy;
+}
+
+.no-underline {
+  text-decoration: none;
+}
