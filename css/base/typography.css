@@ -1,17 +1,17 @@
 @font-face {
   font-family: 'ObjectSans-Heavy';
-  src: url('../assets/fonts/object-sans/ObjectSans-Heavy.otf') format('otf');
-  src: url('../assets/fonts/object-sans/ObjectSans-Heavy.ttf') format('ttf');
-  src: url('../assets/fonts/object-sans/ObjectSans-Heavy.woff') format('woff');
-  src: url('../assets/fonts/object-sans/ObjectSans-Heavy.woff2') format('woff2');
+  src: url('../../assets/fonts/object-sans/ObjectSans-Heavy.otf') format('otf');
+  src: url('../../assets/fonts/object-sans/ObjectSans-Heavy.ttf') format('ttf');
+  src: url('../../assets/fonts/object-sans/ObjectSans-Heavy.woff') format('woff');
+  src: url('../../assets/fonts/object-sans/ObjectSans-Heavy.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'ObjectSans-Regular';
-  src: url('../assets/fonts/object-sans/ObjectSans-Regular.otf') format('otf');
-  src: url('../assets/fonts/object-sans/ObjectSans-Regular.ttf') format('ttf');
-  src: url('../assets/fonts/object-sans/ObjectSans-Heavy.woff') format('woff');
-  src: url('../assets/fonts/object-sans/ObjectSans-Heavy.woff2') format('woff2');
+  src: url('../../assets/fonts/object-sans/ObjectSans-Regular.otf') format('otf');
+  src: url('../../assets/fonts/object-sans/ObjectSans-Regular.ttf') format('ttf');
+  src: url('../../assets/fonts/object-sans/ObjectSans-Heavy.woff') format('woff');
+  src: url('../../assets/fonts/object-sans/ObjectSans-Heavy.woff2') format('woff2');
 }
 
 h1 {
@@ -60,3 +60,5 @@ line-height: 24px;
 .no-underline {
   text-decoration: none;
 }
+
+
