@@ -3,7 +3,7 @@ h3 {
 	font-size: 24px;
 	color: #000000;
 	letter-spacing: -0.3px;
-	text-align: center;
+
 	margin: 0px
 }
 
@@ -19,8 +19,7 @@ font-family: ObjectSans-Regular;
 font-size: 16px;
 color: #000000;
 letter-spacing: -0.2px;
-text-align: center;
-margin: 16px;
+line-height: 24px;
 }
 
 
@@ -40,6 +39,7 @@ line-height: 24px;
 	box-shadow: 2px 2px 24px 0 rgba(140,140,140,0.50);
 	overflow: hidden;
 	margin: 0 auto;
+	margin-bottom: 24px;
 	height: 640px;	
 	width: 328px;
 
@@ -63,10 +63,42 @@ line-height: 24px;
 	position: relative;
 	height: 8px;
 	width: 328px;
-	bottom: -10px;
+	bottom: 4px;
 
 }
 
-.divider {
-	height:24px;
+.font-center {
+	text-align: center;
+}
+
+.font-left {
+	text-align: left;
+	margin: 0px
+}
+.header-left {
+	margin-bottom: 8px;
+}
+
+.icon-margin {
+	margin-right:8px;
+}
+
+
+
+.list-item {
+	margin: 24px 24px 24px 24px;
+	text-align: left;
+
+}
+.column {
+	display: flex;
+}
+.row-container {
+	display: flex;
+	margin: 0px;
+	justify-content: space-between;
+    align-items: center
+}
+.shitty-hacky-divider {
+	height:10px;
 }
