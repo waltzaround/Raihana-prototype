@@ -81,13 +81,38 @@
 
   function scanSuccessHandler(successObj) {
     var licenseId = successObj.result;
-    var driverLicenseDataFiltered = dummyData.filter(function(data){ return data.licenseId === licenseId; });
-    var driverLicenseData = driverLicenseDataFiltered[0];
+    // var driverLicenseDataFiltered = dummyData.filter(function(data){ return data.licenseId === licenseId; });
+    // var driverLicenseData = driverLicenseDataFiltered[0];
 
-    driverLicenseData.status = checkLicenseStatus({driverLicenseData: driverLicenseData})
+    var endpoint = 'https://tf4aqgbmuc.execute-api.us-east-2.amazonaws.com/Prod/license/' + licenseId;
 
-    localStorage.driverLicenseData = JSON.stringify(driverLicenseData);
-    window.location.href = './html/result.html'; //one level up
+    console.log('endpoint', endpoint);
+
+    fetch(endpoint, {
+      mode: 'no-cors',         
+      headers: {
+        "Content-Type": "application/json"
+      },
+    }).then(function(response) {
+      if (response.status !== 200) {
+        console.log('Looks like there was a problem. Status Code: ' + response.status);
+        return;
+      }
+
+      console.log('in');
+
+      // Examine the text in the response
+      response.json().then(function(data) {
+        var driverLicenseData = data;
+        driverLicenseData.status = checkLicenseStatus({driverLicenseData: driverLicenseData})
+
+        localStorage.driverLicenseData = JSON.stringify(driverLicenseData);
+        window.location.href = './html/result.html'; //one level up
+      });
+    })
+    .catch(function(err) {
+      console.log('Fetch Error :-S', err);
+    });
   }
 
   function tick() {
