@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="../../../css/base/reset.css">
+  <link rel="stylesheet" href="../../../css/base/typography.css">
+  <link rel="stylesheet" href="../../../css/base/colors.css">
+  <link rel="stylesheet" href="../../../css/base/layout.css">
+
+  <link rel="stylesheet" href="../../../css/components.css">
+  <link rel="stylesheet" href="../../../css/pages/scan-status.css">
+
+</head>
+
+<body class="background-grey body-center-wrapper">
+  <div id="cardContainer" class="card-container">
+    <div id="profileImage" class="image-container"></div>
+    <h3 id="name" class="scan-status-title">Jorg Van Hooven</h3>
+    <p class="scan-status-subtitle">Age <span id="age">23</span> (<span id="dateOfBirth">23 Jan 1995</span>)</p>
+    <p id="licenseId" class="scan-status-subtitle">AA2314AA2</p>
+    <div class="scan-status-icon-container">
+      <svg id="successIcon" class="scan-status-icon-container__icon scan-status-icon-container__icon--hidden" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 55 55" width="55" height="55"><path fill="#5CB461" d="M27.536.565C12.688.565.638 12.615.638 27.464c0 14.848 12.05 26.898 26.898 26.898 14.848 0 26.899-12.05 26.899-26.898 0-14.848-12.05-26.899-26.899-26.899zm-7.29 38.438l-9.656-9.656a2.679 2.679 0 0 1 0-3.793 2.679 2.679 0 0 1 3.793 0l7.774 7.747 18.506-18.506a2.679 2.679 0 0 1 3.792 0 2.679 2.679 0 0 1 0 3.792L24.04 39.003c-1.022 1.05-2.743 1.05-3.792 0z" /></svg>
+      <svg id="failureIcon" class="scan-status-icon-container__icon scan-status-icon-container__icon--hidden" xmlns="http://www.w3.org/2000/svg" width="64" height="64"><g fill="none" fill-rule="evenodd"><path d="M1 0h64v64H1z"/><path fill="#EC4C4C" fill-rule="nonzero" d="M32 0C14.336 0 0 14.336 0 32s14.336 32 32 32 32-14.336 32-32S49.664 0 32 0z"/><path fill="#FFF" fill-rule="nonzero" d="M32.031 25.554l8.675-8.675a3 3 0 0 1 4.243 0l2.235 2.235a3 3 0 0 1 0 4.242l-8.675 8.675 8.675 8.675a3 3 0 0 1 0 4.243l-2.235 2.235a3 3 0 0 1-4.243 0l-8.675-8.675-8.675 8.675a3 3 0 0 1-4.242 0l-2.235-2.235a3 3 0 0 1 0-4.243l8.675-8.675-8.675-8.675a3 3 0 0 1 0-4.242l2.235-2.235a3 3 0 0 1 4.242 0l8.675 8.675z"/></g></svg>
+
+      <p id="statusMessage" class="font--bold">Approved</p>
+    </div>
+  </div>
+
+  <a class="no-underline" href="../index.html"><button class="button scan-status-button">Back</button></a>
+
+</body>
+
+<script>
+  window.addEventListener('load', function(){
+    var driverLicenseData = JSON.parse(localStorage.driverLicenseData);
+
+    //set data into html
+    document.getElementById('profileImage').style.background = 'url("'+ driverLicenseData.profile_image + '") no-repeat center/cover';
+    document.getElementById('name').textContent = driverLicenseData.first_name + ' ' + driverLicenseData.last_name;
+    document.getElementById('age').textContent = driverLicenseData.age;
+    document.getElementById('dateOfBirth').textContent = driverLicenseData.dateOfBirth;
+    document.getElementById('licenseId').textContent = driverLicenseData.licenseId;
+
+    document.getElementById('statusMessage').textContent = driverLicenseData.status;
+
+    //success of failure
+    if(driverLicenseData.status ==='Approved'){
+      document.getElementById('cardContainer').classList.add('card-container--success');
+      document.getElementById('successIcon').classList.remove('scan-status-icon-container__icon--hidden');
+      document.getElementById('statusMessage').classList.add('color--success');
+    }
+    else {
+      document.getElementById('cardContainer').classList.add('card-container--failure');
+      document.getElementById('failureIcon').classList.remove('scan-status-icon-container__icon--hidden');
+      document.getElementById('statusMessage').classList.add('color--error');
+    }
+  })
+</script>
+
+</html>
