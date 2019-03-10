@@ -68,10 +68,30 @@
 <script type="text/javascript" src="../../js/vendor/jsqrcode/src/alignpat.js"></script>
 <script type="text/javascript" src="../../js/vendor/jsqrcode/src/databr.js"></script>
 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
 <!-- dummy data -->
 <script type="text/javascript" src="../../dummyData.js"></script>
 
 <script>
+  // function calculate_age(birth_month,birth_day,birth_year){
+  function calculate_age(dateObj){
+    var birth_month = dateObj.birth_month;
+    var birth_day = dateObj.birth_day;
+    var birth_year = dateObj.birth_year;
+
+    today_date = new Date();
+    today_year = today_date.getFullYear();
+    today_month = today_date.getMonth();
+    today_day = today_date.getDate();
+    age = today_year - birth_year;
+
+    if ( today_month < (birth_month - 1)){ age--; }
+    if (((birth_month - 1) == today_month) && (today_day < birth_day)){ age--; }
+    return age;
+  }
+
   function checkLicenseStatus(validLicenseObj) {
     var driverLicenseData = validLicenseObj.driverLicenseData;
 
@@ -81,38 +101,29 @@
 
   function scanSuccessHandler(successObj) {
     var licenseId = successObj.result;
-    // var driverLicenseDataFiltered = dummyData.filter(function(data){ return data.licenseId === licenseId; });
-    // var driverLicenseData = driverLicenseDataFiltered[0];
-
     var endpoint = 'https://tf4aqgbmuc.execute-api.us-east-2.amazonaws.com/Prod/license/' + licenseId;
 
-    console.log('endpoint', endpoint);
+    axios.get(endpoint).then(function (response) {
+      var driverLicenseData = response.data;
 
-    fetch(endpoint, {
-      mode: 'no-cors',         
-      headers: {
-        "Content-Type": "application/json"
-      },
-    }).then(function(response) {
-      if (response.status !== 200) {
-        console.log('Looks like there was a problem. Status Code: ' + response.status);
-        return;
+      //add age 
+      var dateSplit = driverLicenseData.dateOfBirth.split('/')
+      var dateObj = {
+        birth_month: parseInt(dateSplit[1], 10),
+        birth_day: parseInt(dateSplit[0],10),
+        birth_year: parseInt(dateSplit[2],10)
       }
 
-      console.log('in');
+      driverLicenseData.age = calculate_age(dateObj); //add age to driver license object
+      driverLicenseData.status = checkLicenseStatus({driverLicenseData: driverLicenseData}) //add status to driver license object
 
-      // Examine the text in the response
-      response.json().then(function(data) {
-        var driverLicenseData = data;
-        driverLicenseData.status = checkLicenseStatus({driverLicenseData: driverLicenseData})
-
-        localStorage.driverLicenseData = JSON.stringify(driverLicenseData);
-        window.location.href = './html/result.html'; //one level up
-      });
+      localStorage.driverLicenseData = JSON.stringify(driverLicenseData);
+      window.location.href = './html/result.html'; //one level up
     })
-    .catch(function(err) {
-      console.log('Fetch Error :-S', err);
-    });
+    .catch(function (error) {
+      console.log(error);
+    })
+
   }
 
   function tick() {
